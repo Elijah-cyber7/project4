@@ -1,0 +1,962 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/forklift/protos/Forklift.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/pallet/protos/WoodenPalletStack.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/pallet/protos/WoodenPallet.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/CardboardBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/PlasticCrate.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/fire_extinguisher/protos/FireExtinguisher.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/hospital/protos/EmergencyExitSign.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/humans/pedestrian/protos/Pedestrian.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/SimpleTree.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/freight/protos/IntermodalContainer.proto"
+EXTERNPROTO "../protos/WarehouseFloor.proto"
+EXTERNPROTO "../protos/WarehouseWalls.proto"
+EXTERNPROTO "../protos/WarehouseRoof.proto"
+EXTERNPROTO "../protos/LampRow.proto"
+EXTERNPROTO "../protos/HangingSign.proto"
+EXTERNPROTO "../protos/StorageRackBlock.proto"
+EXTERNPROTO "../protos/RfidBeacon.proto"
+EXTERNPROTO "../protos/LoadingDock.proto"
+EXTERNPROTO "../protos/ChargingPad.proto"
+EXTERNPROTO "../protos/SafetyBollard.proto"
+EXTERNPROTO "../protos/YardLight.proto"
+EXTERNPROTO "../protos/GoalMarker.proto"
+EXTERNPROTO "../protos/OmniWarehouseRobot.proto"
+IMPORTABLE EXTERNPROTO "../protos/ParcelBox.proto"
+IMPORTABLE EXTERNPROTO "../protos/SpillBarrier.proto"
+
+WorldInfo {
+  info [
+    "CS 3630 Project 4: Autonomous Warehouse Challenge."
+    "The warehouse of Chapter 4 of Dellaert & Hutchinson, Introduction to Robotics and Perception."
+    "World frame = book frame: x east, y north (meters), origin at the center of grid cell (0, 0)."
+  ]
+  title "CS 3630 Warehouse Challenge"
+  basicTimeStep 32
+  FPS 30
+}
+DEF VIEWPOINT Viewpoint {
+  orientation -0.16165 0.49574 0.85329 0.73002
+  position -24 -30 36
+  near 0.25
+  bloomThreshold 3
+}
+DEF BACKGROUND TexturedBackground {
+  texture "dusk"
+  luminosity 0.6
+}
+DEF MAIN_LIGHT DirectionalLight {
+  direction 0.35 0.55 -1
+  intensity 1.3
+  castShadows TRUE
+}
+DEF FILL_LIGHT DirectionalLight {
+  direction -0.6 -0.3 -0.7
+  color 0.8 0.87 1
+  intensity 0.45
+}
+WarehouseFloor {
+}
+WarehouseWalls {
+}
+DEF ROOF Group {
+  children [
+    WarehouseRoof {
+    }
+    DEF CEILING_LAMPS Group {
+      children [
+        LampRow {
+          translation 4.5 24.5 8.4
+          name "lamp row 0"
+        }
+        LampRow {
+          translation 12.5 24.5 8.4
+          name "lamp row 1"
+        }
+        LampRow {
+          translation 32.5 24.5 8.4
+          name "lamp row 2"
+        }
+        LampRow {
+          translation 49.5 24.5 8.4
+          name "lamp row 3"
+        }
+        LampRow {
+          translation 66.5 24.5 8.4
+          name "lamp row 4"
+        }
+        LampRow {
+          translation 86.5 24.5 8.4
+          name "lamp row 5"
+        }
+        LampRow {
+          translation 94.5 24.5 8.4
+          name "lamp row 6"
+        }
+      ]
+    }
+    HangingSign {
+      translation 24 9.3 7
+      name "sign A south"
+      sign "A"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 24 39.7 7
+      name "sign A north"
+      sign "A"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 41 9.3 7
+      name "sign B south"
+      sign "B"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 41 39.7 7
+      name "sign B north"
+      sign "B"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 58 9.3 7
+      name "sign C south"
+      sign "C"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 58 39.7 7
+      name "sign C north"
+      sign "C"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 75 9.3 7
+      name "sign D south"
+      sign "D"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 75 39.7 7
+      name "sign D north"
+      sign "D"
+      width 2.2
+      cableLength 1.1
+    }
+    HangingSign {
+      translation 32.5 9 7.4
+      name "sign aisle 1 south"
+      sign "AISLE 1"
+      width 3.2
+      cableLength 1.35
+    }
+    HangingSign {
+      translation 32.5 40 7.4
+      name "sign aisle 1 north"
+      sign "AISLE 1"
+      width 3.2
+      cableLength 1.35
+    }
+    HangingSign {
+      translation 49.5 9 7.4
+      name "sign aisle 2 south"
+      sign "AISLE 2"
+      width 3.2
+      cableLength 1.35
+    }
+    HangingSign {
+      translation 49.5 40 7.4
+      name "sign aisle 2 north"
+      sign "AISLE 2"
+      width 3.2
+      cableLength 1.35
+    }
+    HangingSign {
+      translation 66.5 9 7.4
+      name "sign aisle 3 south"
+      sign "AISLE 3"
+      width 3.2
+      cableLength 1.35
+    }
+    HangingSign {
+      translation 66.5 40 7.4
+      name "sign aisle 3 north"
+      sign "AISLE 3"
+      width 3.2
+      cableLength 1.35
+    }
+  ]
+}
+DEF RACK_A StorageRackBlock {
+  translation 24 24.5 0
+  name "rack A"
+  letter "A"
+  seed 3
+}
+DEF RACK_B StorageRackBlock {
+  translation 41 24.5 0
+  name "rack B"
+  letter "B"
+  seed 7
+}
+DEF RACK_C StorageRackBlock {
+  translation 58 24.5 0
+  name "rack C"
+  letter "C"
+  seed 11
+}
+DEF RACK_D StorageRackBlock {
+  translation 75 24.5 0
+  name "rack D"
+  letter "D"
+  seed 5
+}
+DEF BEACON_0 RfidBeacon {
+  translation 24 9.5 0
+  name "rfid beacon 0"
+  beaconId 0
+}
+DEF BEACON_1 RfidBeacon {
+  translation 41 9.5 0
+  name "rfid beacon 1"
+  beaconId 1
+}
+DEF BEACON_2 RfidBeacon {
+  translation 58 9.5 0
+  name "rfid beacon 2"
+  beaconId 2
+}
+DEF BEACON_3 RfidBeacon {
+  translation 75 9.5 0
+  name "rfid beacon 3"
+  beaconId 3
+}
+DEF BEACON_4 RfidBeacon {
+  translation 24 39.5 0
+  rotation 0 0 1 3.14159
+  name "rfid beacon 4"
+  beaconId 4
+}
+DEF BEACON_5 RfidBeacon {
+  translation 41 39.5 0
+  rotation 0 0 1 3.14159
+  name "rfid beacon 5"
+  beaconId 5
+}
+DEF BEACON_6 RfidBeacon {
+  translation 58 39.5 0
+  rotation 0 0 1 3.14159
+  name "rfid beacon 6"
+  beaconId 6
+}
+DEF BEACON_7 RfidBeacon {
+  translation 75 39.5 0
+  rotation 0 0 1 3.14159
+  name "rfid beacon 7"
+  beaconId 7
+}
+DEF DOCK_1 LoadingDock {
+  translation 99.5 10 0
+  name "dock 1"
+  dockNumber 1
+}
+DEF DOCK_2 LoadingDock {
+  translation 99.5 25 0
+  name "dock 2"
+  dockNumber 2
+  truckCab TRUE
+}
+DEF DOCK_3 LoadingDock {
+  translation 99.5 40 0
+  name "dock 3"
+  dockNumber 3
+  truckCab TRUE
+  cabColor 0.05 0.25 0.55
+}
+DEF FORKLIFT_0 Forklift {
+  translation 3.8 1.8 0.81
+  name "forklift 0"
+  enablePhysics FALSE
+}
+DEF FORKLIFT_1 Forklift {
+  translation 93.2 1.8 0.81
+  rotation 0 0 1 3.14159
+  name "forklift 1"
+  enablePhysics FALSE
+}
+DEF PICKUP_MARKER GoalMarker {
+  translation 0 0 -20
+  color 1 0.82 0.1
+}
+DEF DROPOFF_MARKER GoalMarker {
+  translation 0 0 -20
+  color 0.25 1 0.45
+}
+DEF PING_RING Transform {
+  translation 24 9.5 -2
+  scale 0.5 0.5 0.5
+  children [
+    Shape {
+      castShadows FALSE
+      isPickable FALSE
+      appearance DEF PING_RING_MATERIAL PBRAppearance {
+        baseColor 0 0 0
+        baseColorMap DEF PING_RING_TEXTURE ImageTexture {
+          url [
+            "../textures/ping_ring.png"
+          ]
+        }
+        transparency 0.99
+        roughness 1
+        metalness 0
+        emissiveColorMap USE PING_RING_TEXTURE
+        emissiveColor 0 0.85 1
+        emissiveIntensity 3
+      }
+      geometry Plane {
+        size 2 2
+      }
+    }
+  ]
+}
+DEF AMR OmniWarehouseRobot {
+  translation 8 6 0
+  name "amr"
+  controller "warehouse_mission"
+  supervisor TRUE
+}
+ChargingPad {
+  translation 0.3 20.5 0
+  name "charging pad 1"
+}
+ChargingPad {
+  translation 0.3 24.5 0
+  name "charging pad 2"
+}
+ChargingPad {
+  translation 0.3 28.5 0
+  name "charging pad 3"
+}
+OmniWarehouseRobot {
+  translation 0.3 20.5 0.028
+  name "fleet robot 1"
+  bodyColor 0.92 0.92 0.9
+  accentColor 0.9 0.35 0.05
+  ledColor 0.1 1 0.3
+  irisColor 0.1 1 0.3
+  withDevices FALSE
+}
+OmniWarehouseRobot {
+  translation 0.3 28.5 0.028
+  name "fleet robot 2"
+  bodyColor 0.1 0.62 0.72
+  accentColor 0.08 0.1 0.14
+  ledColor 0.1 1 0.3
+  irisColor 0.1 1 0.3
+  withDevices FALSE
+}
+HangingSign {
+  translation -0.44 24.5 3.6
+  rotation 0 0 1 1.5708
+  name "banner charging"
+  sign "CHARGING"
+  width 4.2
+  doubleSided FALSE
+  glow 0.6
+}
+HangingSign {
+  translation -0.44 4.5 4.6
+  rotation 0 0 1 1.5708
+  name "banner receiving south"
+  sign "RECEIVING"
+  width 5.2
+  doubleSided FALSE
+  glow 0.6
+}
+HangingSign {
+  translation -0.44 44.5 4.6
+  rotation 0 0 1 1.5708
+  name "banner receiving north"
+  sign "RECEIVING"
+  width 5.2
+  doubleSided FALSE
+  glow 0.6
+}
+HangingSign {
+  translation 99.44 17.5 4.6
+  rotation 0 0 1 -1.5708
+  name "banner shipping south"
+  sign "SHIPPING"
+  width 5.2
+  doubleSided FALSE
+  glow 0.6
+}
+HangingSign {
+  translation 99.44 32.5 4.6
+  rotation 0 0 1 -1.5708
+  name "banner shipping north"
+  sign "SHIPPING"
+  width 5.2
+  doubleSided FALSE
+  glow 0.6
+}
+HangingSign {
+  translation 49.5 -0.86 7.2
+  name "facility sign"
+  sign "FACILITY"
+  width 18
+  doubleSided FALSE
+  glow 0.8
+}
+WoodenPalletStack {
+  translation 0.05 3 0
+  rotation 0 0 1 1.5708
+  name "pallet stack 1"
+  palletNumber 7
+}
+WoodenPalletStack {
+  translation 0.05 4.4 0
+  rotation 0 0 1 1.5708
+  name "pallet stack 2"
+  palletNumber 4
+}
+WoodenPallet {
+  translation 0.05 6.4 0
+  rotation 0 0 1 1.5708
+  name "receiving pallet 1"
+}
+CardboardBox {
+  translation 0.05 6.15 0.39
+  name "receiving box 1"
+  size 0.7 0.45 0.5
+}
+CardboardBox {
+  translation 0.05 6.65 0.37
+  name "receiving box 2"
+  size 0.7 0.45 0.46
+}
+CardboardBox {
+  translation 0.05 6.35 0.84
+  rotation 0 0 1 0.1
+  name "receiving box 3"
+  size 0.55 0.5 0.4
+}
+PlasticCrate {
+  translation 0 9.4 0
+  name "crate 1"
+  size 0.6 0.4 0.3
+  color 0.1 0.35 0.8
+}
+PlasticCrate {
+  translation 0 9.4 0.3
+  name "crate 2"
+  size 0.6 0.4 0.3
+  color 0.1 0.35 0.8
+}
+PlasticCrate {
+  translation 0 9.85 0
+  name "crate 3"
+  size 0.6 0.4 0.3
+  color 0.1 0.35 0.8
+}
+PlasticCrate {
+  translation 0 10.3 0
+  name "crate 4"
+  size 0.6 0.4 0.3
+  color 0.85 0.3 0.05
+}
+PlasticCrate {
+  translation 0 10.3 0.3
+  name "crate 5"
+  size 0.6 0.4 0.3
+  color 0.85 0.3 0.05
+}
+PlasticCrate {
+  translation 0 10.3 0.6
+  name "crate 6"
+  size 0.6 0.4 0.3
+  color 0.85 0.3 0.05
+}
+WoodenPalletStack {
+  translation 0.05 34 0
+  rotation 0 0 1 1.5708
+  name "pallet stack 3"
+  palletNumber 9
+}
+WoodenPallet {
+  translation 0.05 36 0
+  rotation 0 0 1 1.5708
+  name "receiving pallet 2"
+}
+CardboardBox {
+  translation 0.05 35.75 0.44
+  name "receiving box 4"
+  size 0.7 0.45 0.6
+}
+CardboardBox {
+  translation 0.05 36.25 0.39
+  name "receiving box 5"
+  size 0.7 0.45 0.5
+}
+Pedestrian {
+  translation 0.75 12.6 1.27
+  rotation 0 0 1 0.3
+  name "worker receiving"
+  controller "<none>"
+  shirtColor 0.95 0.55 0.05
+  pantsColor 0.12 0.14 0.2
+}
+Pedestrian {
+  translation 98.75 18.8 1.27
+  rotation 0 0 1 3.4
+  name "worker shipping"
+  controller "<none>"
+  shirtColor 0.95 0.85 0.1
+  pantsColor 0.15 0.17 0.22
+}
+Pedestrian {
+  translation 44 48.7 1.27
+  rotation 0 0 1 -1.3
+  name "worker north"
+  controller "<none>"
+  shirtColor 0.2 0.6 0.95
+  pantsColor 0.2 0.2 0.25
+}
+WoodenPallet {
+  translation 99 15.5 0
+  rotation 0 0 1 1.5708
+  name "outbound pallet 1"
+}
+CardboardBox {
+  translation 99 15.3 0.4
+  name "outbound box 1"
+  size 0.6 0.35 0.52
+}
+CardboardBox {
+  translation 99 15.72 0.36
+  name "outbound box 2"
+  size 0.6 0.4 0.44
+}
+WoodenPalletStack {
+  translation 99 34.5 0
+  rotation 0 0 1 1.5708
+  name "pallet stack 4"
+  palletNumber 5
+}
+WoodenPallet {
+  translation 18 49 0
+  name "north pallet 1"
+}
+CardboardBox {
+  translation 17.75 49 0.39
+  name "north box 1"
+  size 0.5 0.7 0.5
+}
+CardboardBox {
+  translation 18.3 49 0.34
+  name "north box 2"
+  size 0.5 0.7 0.4
+}
+WoodenPalletStack {
+  translation 62 49 0
+  name "pallet stack 5"
+  palletNumber 6
+}
+PlasticCrate {
+  translation 80 49.1 0
+  name "crate 7"
+  size 0.6 0.4 0.3
+  color 0.2 0.6 0.25
+}
+PlasticCrate {
+  translation 80.65 49.1 0
+  name "crate 8"
+  size 0.6 0.4 0.3
+  color 0.2 0.6 0.25
+}
+PlasticCrate {
+  translation 80.3 49.1 0.3
+  name "crate 9"
+  size 0.6 0.4 0.3
+  color 0.2 0.6 0.25
+}
+WoodenPalletStack {
+  translation 28 0 0
+  name "pallet stack 6"
+  palletNumber 3
+}
+CardboardBox {
+  translation 55 0 0.3
+  name "south box 1"
+  size 0.6 0.6 0.6
+}
+CardboardBox {
+  translation 55.65 0.05 0.25
+  rotation 0 0 1 0.2
+  name "south box 2"
+  size 0.5 0.5 0.5
+}
+FireExtinguisher {
+  translation -0.3 16.5 0
+  rotation 0 0 1 1.5708
+  name "extinguisher west 1"
+  enablePhysics FALSE
+}
+FireExtinguisher {
+  translation -0.3 42.5 0
+  rotation 0 0 1 1.5708
+  name "extinguisher west 2"
+  enablePhysics FALSE
+}
+FireExtinguisher {
+  translation 99.3 21 0
+  rotation 0 0 1 -1.5708
+  name "extinguisher east 1"
+  enablePhysics FALSE
+}
+FireExtinguisher {
+  translation 99.3 36.2 0
+  rotation 0 0 1 -1.5708
+  name "extinguisher east 2"
+  enablePhysics FALSE
+}
+FireExtinguisher {
+  translation 34.5 49.3 0
+  rotation 0 0 1 3.14159
+  name "extinguisher north"
+  enablePhysics FALSE
+}
+FireExtinguisher {
+  translation 64.5 -0.3 0
+  name "extinguisher south"
+  enablePhysics FALSE
+}
+EmergencyExitSign {
+  translation -0.45 31.2 2.65
+  rotation 0 0 1 1.5708
+  name "exit sign west"
+}
+EmergencyExitSign {
+  translation 45 -0.45 2.65
+  name "exit sign south"
+}
+EmergencyExitSign {
+  translation 30 49.45 2.65
+  rotation 0 0 1 3.14159
+  name "exit sign north"
+}
+SafetyBollard {
+  translation 1.1 17.6 0
+  name "bollard charging 1"
+}
+SafetyBollard {
+  translation 1.1 31.4 0
+  name "bollard charging 2"
+}
+YardLight {
+  translation 12 -9 -1.2
+  rotation 0 0 1 1.57080
+  name "yard light south 0"
+}
+YardLight {
+  translation 30 -9 -1.2
+  rotation 0 0 1 1.57080
+  name "yard light south 1"
+}
+YardLight {
+  translation 68 -9 -1.2
+  rotation 0 0 1 1.57080
+  name "yard light south 2"
+}
+YardLight {
+  translation 86 -9 -1.2
+  rotation 0 0 1 1.57080
+  name "yard light south 3"
+}
+YardLight {
+  translation -9 8 -1.2
+  rotation 0 0 1 0.00000
+  name "yard light west 4"
+}
+YardLight {
+  translation -9 24.5 -1.2
+  rotation 0 0 1 0.00000
+  name "yard light west 5"
+}
+YardLight {
+  translation -9 41 -1.2
+  rotation 0 0 1 0.00000
+  name "yard light west 6"
+}
+YardLight {
+  translation 12 58 -1.2
+  rotation 0 0 1 -1.57080
+  name "yard light north 7"
+}
+YardLight {
+  translation 30 58 -1.2
+  rotation 0 0 1 -1.57080
+  name "yard light north 8"
+}
+YardLight {
+  translation 50 58 -1.2
+  rotation 0 0 1 -1.57080
+  name "yard light north 9"
+}
+YardLight {
+  translation 68 58 -1.2
+  rotation 0 0 1 -1.57080
+  name "yard light north 10"
+}
+YardLight {
+  translation 86 58 -1.2
+  rotation 0 0 1 -1.57080
+  name "yard light north 11"
+}
+YardLight {
+  translation 124 2.5 -1.2
+  rotation 0 0 1 3.14159
+  name "yard light east 12"
+}
+YardLight {
+  translation 124 17.5 -1.2
+  rotation 0 0 1 3.14159
+  name "yard light east 13"
+}
+YardLight {
+  translation 124 32.5 -1.2
+  rotation 0 0 1 3.14159
+  name "yard light east 14"
+}
+YardLight {
+  translation 124 47.5 -1.2
+  rotation 0 0 1 3.14159
+  name "yard light east 15"
+}
+SimpleTree {
+  translation -24 0 -1.2
+  name "tree 0"
+  type "oak tree"
+  height 8
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation -24 14 -1.2
+  name "tree 1"
+  type "spruce"
+  height 9
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation -24 28 -1.2
+  name "tree 2"
+  type "oak tree"
+  height 10
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation -24 42 -1.2
+  name "tree 3"
+  type "spruce"
+  height 8
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation -24 56 -1.2
+  name "tree 4"
+  type "oak tree"
+  height 9
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 8 -24 -1.2
+  name "tree 5"
+  type "spruce"
+  height 9
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 26 -24 -1.2
+  name "tree 6"
+  type "oak tree"
+  height 10
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 44 -24 -1.2
+  name "tree 7"
+  type "spruce"
+  height 8
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 62 -24 -1.2
+  name "tree 8"
+  type "oak tree"
+  height 9
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 80 -24 -1.2
+  name "tree 9"
+  type "spruce"
+  height 10
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 98 -24 -1.2
+  name "tree 10"
+  type "oak tree"
+  height 8
+  radius 3.2
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation -10 70 -1.2
+  name "tree 11"
+  type "oak tree"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 6 70 -1.2
+  name "tree 12"
+  type "spruce"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 22 70 -1.2
+  name "tree 13"
+  type "oak tree"
+  height 11
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 38 70 -1.2
+  name "tree 14"
+  type "spruce"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 54 70 -1.2
+  name "tree 15"
+  type "oak tree"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 70 70 -1.2
+  name "tree 16"
+  type "spruce"
+  height 11
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 86 70 -1.2
+  name "tree 17"
+  type "oak tree"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 102 70 -1.2
+  name "tree 18"
+  type "spruce"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 -10 -1.2
+  name "tree 19"
+  type "spruce"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 4 -1.2
+  name "tree 20"
+  type "oak tree"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 18 -1.2
+  name "tree 21"
+  type "spruce"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 32 -1.2
+  name "tree 22"
+  type "oak tree"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 46 -1.2
+  name "tree 23"
+  type "spruce"
+  height 9
+  radius 3.4
+  enableBoundingObject FALSE
+}
+SimpleTree {
+  translation 138 60 -1.2
+  name "tree 24"
+  type "oak tree"
+  height 10
+  radius 3.4
+  enableBoundingObject FALSE
+}
+IntermodalContainer {
+  translation 116 62 -1.2
+  rotation 0 0 1 0.05
+  name "container 1"
+  color 0.72 0.12 0.08
+}
+IntermodalContainer {
+  translation 116 62 1.39
+  rotation 0 0 1 0.02
+  name "container 2"
+  color 0.05 0.3 0.55
+}
+IntermodalContainer {
+  translation 116 65 -1.2
+  name "container 3"
+  color 0.9 0.55 0.05
+}

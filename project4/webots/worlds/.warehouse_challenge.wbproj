@@ -1,0 +1,4 @@
+Webots Project File version R2025a
+renderingDevicePerspectives: amr:floor_holo;0;1;0;0
+renderingDevicePerspectives: amr:fpv;0;1;0;0
+renderingDevicePerspectives: amr:minimap;1;0.6;0.005;0.72
